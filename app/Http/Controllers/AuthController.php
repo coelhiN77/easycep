@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -19,18 +17,34 @@ class AuthController extends Controller
 
     public function registerSave(Request $request)
     {
-        Validator::make($request->all(), [
-            'name' => ['required', Rule::unique('account', 'name')],
-            'email' => ['required', 'email', Rule::unique('account', 'email')],
-            'password' => 'required|confirmed'
-        ])->validate();
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed',
+        ], [
+            'name.unique' => 'Name address already exists.',
+            'email.unique' => 'Email address already exists.',
+        ]);
 
-        DB::table('account')->insert([
+        if ($validator->fails()) {
+            return redirect()->route('register')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
+            'level' => 'Admin',
+            ]);
 
         return redirect()->route('login');
+    }
+
+    public function login()
+    {
+        Session::regenerateToken();
+        return view('auth/login');
     }
 }
