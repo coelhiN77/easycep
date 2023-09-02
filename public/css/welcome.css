@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #32C48D;
+    font-family: 'Poppins';
+}
+
+.backgroundW {
+    text-align: center;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* texto principal */
+h1 {
+    font-size: 55px;
+    margin-bottom: -20px;
+}
+
+/* texto explicativo */
+p {
+    font-size: 22px;
+}
+
+/* botão iniciar */
+a {
+    display: block;
+    font-size: 18px;
+    text-decoration: none;
+    width: 200px;
+    background-color: black;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin: 0 auto;
+}
+
+a:hover {
+    background-color: #228B22;
+}
