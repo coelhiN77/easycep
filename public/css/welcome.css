@@ -5,7 +5,9 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #32C48D;
+    background-image: url('/assets/bgeasycep.jpg');
+    background-size: cover;
+    background-position: center;
     font-family: 'Poppins';
 }
 
