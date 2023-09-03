@@ -29,3 +29,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 
+// Profile do usuario e autenticação de login
+Route::middleware('auth')->group(function () {
+    Route::get('dashboard', function() {
+        return view('dashboard');
+    })->name('dashboard');
+});
