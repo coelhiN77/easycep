@@ -59,11 +59,11 @@
             <div class="profile-desc">
                 <div>
                     <label>Nome:</label>
-                    <input id="name" name="name" placeholder="{{ auth()->user()->name }}"></input>
+                    <span id="name" name="name">{{ auth()->user()->name }}</span>
                 </div>
                 <div>
                     <label>Email:</label>
-                    <input id="email" name="email" placeholder="{{ auth()->user()->email }}"></input>
+                    <span id="email" name="email">{{ auth()->user()->email }}</span>
                 </div>
             </div>
         </form>
