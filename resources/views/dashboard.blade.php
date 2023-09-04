@@ -17,9 +17,14 @@
         <div class="navbar-left">
             <img class="logo-easy" src="{{ asset('assets/logoeasycep.png') }}">
         </div>
+        <!-- Aparece foto, nome e botão de sair -->
         <div class="navbar-right">
             <div class="user-info">
-                <img src="" alt="test">
+                @if(empty(auth()->user()->profile_image))
+                     <img src="{{ asset('assets/defaultPhoto.png') }}">
+                @else
+                    <img src="{{ asset('storage/' . auth()->user()->profile_image) }}">
+                @endif
                 <span>{{ auth()->user()->name }}</span>
                 <a href="{{ route('logout') }}">Sair</a>
             </div>
@@ -28,19 +33,24 @@
 
     <div class="container">
       <div class="left-side">
-        <form action="" method="POST">
+        <!-- Add foto de perfil -->
+        <form action="{{ route('update.profile') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <h1>Painel do Usuário</h1>
                 <hr />
                 <div class="profile-photo">
-                        <img src="" alt="test">
+                    @if(empty(auth()->user()->profile_image))
+                        <img src="{{ asset('assets/defaultPhoto.png') }}">
+                    @else
+                        <img src="{{ asset('storage/' . auth()->user()->profile_image) }}">
+                    @endif
                     <div class="profile-button">
                         <div class="upload-message" style="display: none; color: blue;"></div>
                         <label for="profile-image-upload" class="file-upload-btn">
                             <i class="fa fa-camera"></i> Escolher Foto
                         </label>
-                        <input>
-                        <button>
+                        <input type="file" name="profile_image" id="profile-image-upload" accept="image/*" style="display: none;">
+                        <button type="submit" class="file-upload-btn">
                             <i class="fa fa-save"></i> Salvar Foto
                         </button>
                     </div>
@@ -49,11 +59,11 @@
             <div class="profile-desc">
                 <div>
                     <label>Nome:</label>
-                    <span>{{ auth()->user()->name }}</span>
+                    <input id="name" name="name" placeholder="{{ auth()->user()->name }}"></input>
                 </div>
                 <div>
                     <label>Email:</label>
-                    <span>{{ auth()->user()->email }}</span>
+                    <input id="email" name="email" placeholder="{{ auth()->user()->email }}"></input>
                 </div>
             </div>
         </form>
@@ -106,9 +116,10 @@
         <p>coelhiN <span>❤</span></p>
     </footer>
 
-    <!-- API e SAVE CEP-->
+    <!-- API, SAVE CEP e SAVE FOTO DE PERFIL-->
     <script src="{{ asset('js/api.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('js/profile.js') }}"></script>
 
     <script>
         var saveCepUrl = "{{ route('save.cep') }}";
