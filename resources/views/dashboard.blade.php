@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- obter token csrf -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -57,7 +59,7 @@
         </form>
       </div>
 
-      <!-- CEP (API) -->
+      <!-- CEP (API e Salvamento) -->
       <div class="right-side">
             <form id="cep-form">
                 @csrf
@@ -91,6 +93,10 @@
                         <div class="value"><span id="ibge"></span></div>
                     </div>
                 </div>
+
+                <!-- salvar cep -->
+                <button type="button" id="save-cep-button" class="button-cep">Salvar CEP</button>
+                <div id="cep-salvo" style="color: blue; font-size: 20px;"></div>
             </form>
       </div>
 
@@ -100,8 +106,13 @@
         <p>coelhiN <span>❤</span></p>
     </footer>
 
-    <!-- SCRIPTS HERE-->
+    <!-- API e SAVE CEP-->
     <script src="{{ asset('js/api.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        var saveCepUrl = "{{ route('save.cep') }}";
+    </script>
+    <script src="{{ asset('js/cep.js') }}"></script>
 </body>
 </html>
