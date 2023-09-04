@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
+    // REGISTRAR
     public function register()
     {
         return view('auth/register');
@@ -43,6 +44,7 @@ class AuthController extends Controller
         return redirect()->route('login');
     }
 
+    // LOGIN
     public function login()
     {
         Session::regenerateToken();
@@ -73,6 +75,7 @@ class AuthController extends Controller
         ]);
     }
 
+    // DESLOGAR
     public function logout(Request $request)
     {
         Auth::guard('web')->logout();
@@ -80,5 +83,22 @@ class AuthController extends Controller
         $request->session()->invalidate();
 
         return redirect('/');
+    }
+
+    // SALVAR CEP
+    public function saveCep(Request $request)
+    {
+        $user = auth()->user();
+
+        $user->cep = $request->input('cep');
+        $user->rua = $request->input('rua');
+        $user->bairro = $request->input('bairro');
+        $user->cidade = $request->input('cidade');
+        $user->estado = $request->input('estado');
+        $user->ddd = $request->input('ddd');
+        $user->ibge = $request->input('ibge');
+
+        $user->save();
+        return response()->json(['message' => 'CEP salvo com sucesso'], 200);
     }
 }
