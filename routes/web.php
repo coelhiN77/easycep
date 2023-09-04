@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Criar conta
+// Registrar, Logar, Deslogar
 Route::controller(AuthController::class)->group(function () {
     Route::get('register', 'register')->name('register');
     Route::post('register', 'registerSave')->name('register.save');
@@ -29,9 +29,11 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 
-// Profile do usuario e autenticação de login
+// Profile do usuario e autenticação de login / Save do CEP
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', function() {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::post('save-cep', 'App\Http\Controllers\AuthController@saveCep')->name('save.cep');
 });
