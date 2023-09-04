@@ -57,40 +57,41 @@
         </form>
       </div>
 
+      <!-- CEP (API) -->
       <div class="right-side">
-            <form>
+            <form id="cep-form">
                 @csrf
-                <div></div>
-                <label for="cep">CEP</label>
+                <div id="cep-error" style="color: red; font-size: 20px;"></div>
+                <label for="cep" style="font-size: 20px">CEP</label>
                 <input type="text" id="cep" name="cep" placeholder="Digite o CEP">
+
+                <!-- informações da pesquisa do cep -->
+                <div id="endereco">
+                    <div class="row">
+                        <div class="label">Rua:</div>
+                        <div class="value"><span id="rua"></span></div>
+
+                        <div class="label">Bairro:</div>
+                        <div class="value"><span id="bairro"></span></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="label">Cidade:</div>
+                        <div class="value"><span id="cidade"></span></div>
+
+                        <div class="label">Estado:</div>
+                        <div class="value"><span id="estado"></span></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="label">DDD:</div>
+                        <div class="value"><span id="ddd"></span></div>
+
+                        <div class="label">IBGE:</div>
+                        <div class="value"><span id="ibge"></span></div>
+                    </div>
+                </div>
             </form>
-
-            <!-- RESULTS SEARCH CEP -->
-            <div id="endereco">
-                <div class="row">
-                    <div class="label">Rua:</div>
-                    <div class="value"><span id="rua"></span></div>
-
-                    <div class="label">Bairro:</div>
-                    <div class="value"><span id="bairro"></span></div>
-                </div>
-
-                <div class="row">
-                    <div class="label">Cidade:</div>
-                    <div class="value"><span id="cidade"></span></div>
-
-                    <div class="label">Estado:</div>
-                    <div class="value"><span id="estado"></span></div>
-                </div>
-
-                <div class="row">
-                    <div class="label">DDD:</div>
-                    <div class="value"><span id="ddd"></span></div>
-
-                    <div class="label">IBGE:</div>
-                    <div class="value"><span id="ibge"></span></div>
-                </div>
-            </div>
       </div>
 
     </div>
@@ -100,6 +101,7 @@
     </footer>
 
     <!-- SCRIPTS HERE-->
-
+    <script src="{{ asset('js/api.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
