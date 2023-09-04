@@ -29,11 +29,13 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 
-// Profile do usuario e autenticação de login / Save do CEP
+// Profile do usuario e autenticação de login / Save do CEP / Save foto de perfil
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', function() {
         return view('dashboard');
     })->name('dashboard');
 
     Route::post('save-cep', 'App\Http\Controllers\AuthController@saveCep')->name('save.cep');
+
+    Route::post('update-profile', 'App\Http\Controllers\AuthController@updateProfile')->name('update.profile');
 });
