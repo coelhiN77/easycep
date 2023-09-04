@@ -74,7 +74,7 @@ body {
     height: 550px;
     margin: auto;
     display: flex;
-    background: rgb(214, 214, 214);
+    background: #d6d6d6;
     border-radius: 10px;
     box-shadow: 5px 5px 7px gray, -5px -5px 7px gray;
 }
@@ -139,9 +139,8 @@ hr {
     border-radius: 100%;
     width: 200px;
     height: 200px;
-    margin: 0 auto;
+    margin: 15px auto 0;
     display: block;
-    margin-top: 15px;
 }
 
 .profile-button {
@@ -157,9 +156,8 @@ hr {
     display: block;
     font-size: 18px;
     font-weight: 600;
-    margin-bottom: 5px;
+    margin: 20px 0 5px;
     color: #333;
-    margin-top: 20px;
 }
 
 .profile-desc span {
@@ -191,7 +189,6 @@ hr {
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
-    font-size: 25px;
 }
 
 #cep-form input {
@@ -208,7 +205,6 @@ hr {
 
 #cep-form input:focus {
     background-color: #e4e4e4;
-    border: 2px solid #32C48D;
 }
 
 #cep-error {
@@ -222,9 +218,8 @@ hr {
     align-items: center;
     border: none;
     padding: 20px;
-    margin-bottom: 50px;
+    margin: -15px 0 30px;
     text-align: center;
-    margin-top: -15px;
 }
 
 .endereco label {
@@ -241,11 +236,30 @@ hr {
     padding: 8px;
     width: 100%;
     box-sizing: border-box;
-    margin-top: 5px;
-    margin-right: 20px;
-    margin-left: 10px;
+    margin: 5px 20px 0 10px;
 }
 
 .row span {
     padding: 10px;
+}
+
+.button-cep {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #32C48D;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.4s ease;
+    margin: -30px auto 0;
+}
+
+.button-cep:hover {
+    background-color: #228B22;
 }
