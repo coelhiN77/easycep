@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -100,5 +101,24 @@ class AuthController extends Controller
 
         $user->save();
         return response()->json(['message' => 'CEP salvo com sucesso'], 200);
+    }
+
+    // FOTO DE PERFIL
+    public function updateProfile(Request $request)
+    {
+        $user = auth()->user();
+        if ($request->hasFile('profile_image')) {
+            $profileImage = $request->file('profile_image');
+            $imageName = $user->id . '_' . time() . '.' . $profileImage->getClientOriginalExtension();
+
+            Storage::putFileAs('public/profiles', $profileImage, $imageName);
+
+            $user->profile_image = 'profiles/' . $imageName;
+            $user->save();
+
+            session()->put('new_profile_image', $user->profile_image);
+        }
+
+    return redirect()->route('dashboard');
     }
 }
