@@ -1,55 +1,110 @@
-# Instruções para Configurar e Executar Localmente
+<h1 align="center">
+    <p>Easycep</p>
+</h1>
 
-Se você deseja configurar e executar este projeto Laravel em sua máquina local, siga as etapas abaixo:
+## 💻 Sobre o projeto
 
-## Pré-requisitos
+📍 EasyCEP é uma aplicação web construída com Laravel que tem como objetivo tornar a integração com a API de CEP do Brasil mais simples.
 
-Certifique-se de que você tenha as seguintes ferramentas e versões instaladas em sua máquina:
+---
 
--   PHP (versão 8.2.10 ou superior)
--   Composer (versão 2.5.8 ou superior)
--   Laravel (versão 5.1.0)
--   XAMPP (ou equivalente)
+## 🚀 Como executar o projeto
 
-## Configuração do Ambiente
+### Pré-requisitos
 
-1. Clone este repositório para sua máquina local:
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 
-    ```bash
-    git clone https://github.com/coelhiN77/easycep.git
-    ```
+-   [Git](https://git-scm.com/downloads)
+-   [XAMPP](https://www.apachefriends.org/)
+-   [PHP](https://www.php.net/downloads.php) (versão 8.2.10 ou superior)
+-   [Composer](https://getcomposer.org/download/) (versão 2.5.8 ou superior).
 
-2. Acesse o diretório do projeto:
+---
+
+#### ⚙️ Configurando o XAMPP
+
+**Nota importante:** Por favor, observe que as únicas alterações a serem feitas são nos números, conforme descrito abaixo. Existem referências para você se localizar nos arquivos, nas primeiras linhas, depois da explicação do que fazer.
+
+1. Acesse a configuração do **Apache** e edite o arquivo 'phpMyAdmin/config.inc.php' e adicione apenas 3007
 
 ```bash
-   git cd easycepdb
+# Antes
+/* Bind to the localhost ipv4 address and tcp */
+$cfg['Servers'][$i]['host'] = '127.0.0.1';
+
+# Depois
+/* Bind to the localhost ipv4 address and tcp */
+$cfg['Servers'][$i]['host'] = '127.0.0.1:3307';
+
 ```
 
-Abra o arquivo .env e configure as informações de conexão com o banco de dados. Você pode usar as seguintes configurações como exemplo, mas ajuste-as conforme necessário:
+2. Acesse a configuração do **Apache** e edite o arquivo 'httpd.conf' e mude apenas de 80 para 8087
 
-dotenv
-Copy code
+```bash
+# Antes
+Listen 12.34.56.78:80
+Listen 80
+
+# Depois
+Listen 12.34.56.78:80
+Listen 8087
+```
+
+3. Acesse a configuração do **MySQL** e edite o 'my.ini' e mude apenas de 3306 para 3307
+
+```bash
+# Antes
+The MySQL server
+default-character-set=utf8mb4
+[mysqld]
+port=3306
+
+# Depois
+The MySQL server
+default-character-set=utf8mb4
+[mysqld]
+port=3307
+```
+
+Inicie o Apache e o MySQL depois de ter feito as configurações anteriores. Para visualizar o banco de dados, clique em 'Admin' do MySQL, aguarde abrir no navegador a URL e, em seguida, adicione 8087 à URL.
+
+```bash
+# Antes
+http://localhost/phpmyadmin/
+
+# Depois
+http://localhost:8087/phpmyadmin/
+```
+
+---
+
+#### 🎲 Rodando o projeto
+
+```bash
+# Clone este repositório
+$ git clone https://github.com/coelhiN77/easycep.git
+
+# Acesse a pasta do projeto no terminal/cmd
+$ cd easycep
+
+# Abra o Visual Studio Code (VSCode) na pasta do projeto digitando no terminal
+$ code .
+
+# Abra o arquivo .env e configure ele da seguinte forma
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3307
 DB_DATABASE=easycepdb
 DB_USERNAME=root
 DB_PASSWORD=
-Certifique-se de que o Apache e o MySQL do XAMPP (ou equivalente) estejam iniciados.
 
-Acesse a configuração do Apache e edite o arquivo phpMyAdmin/config.inc.php. Encontre a linha que define o host do MySQL e adicione a porta 3307, conforme o exemplo abaixo:
+# Instale as dependências do Laravel
+$ composer install
 
-$cfg['Servers'][$i]['host'] = '127.0.0.1:3307';
-Abra o arquivo de configuração do Apache httpd.conf e altere a porta padrão de 80 para 8087, ou outra porta disponível, se necessário.
+# Abra o terminal e digite
+$ php artisan serve
 
-Abra o arquivo de configuração do MySQL (geralmente chamado de my.ini) e ajuste a porta de 3306 para 3307, se ainda não tiver sido feito.
+O Laravel gerará um link semelhante a 'http://127.0.0.1:8000'. Abra este link em seu navegador.
+```
 
-Executando o Projeto
-Inicie o servidor de desenvolvimento do Laravel:
-php artisan serve
-
-O Laravel gerará um link semelhante a [http://127.0.0.1:8000]. Abra este link em seu navegador.
-
-Agora, o projeto Laravel estará sendo executado localmente em sua máquina.
-
-Lembre-se de substituir seu-usuario e seu-repositorio pelas informações corretas do seu repositório. Além disso, verifique se todas as versões e configurações são compatíveis.
+---
