@@ -1,66 +1,55 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Instruções para Configurar e Executar Localmente
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Se você deseja configurar e executar este projeto Laravel em sua máquina local, siga as etapas abaixo:
 
-## About Laravel
+## Pré-requisitos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Certifique-se de que você tenha as seguintes ferramentas e versões instaladas em sua máquina:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   PHP (versão 8.2.10 ou superior)
+-   Composer (versão 2.5.8 ou superior)
+-   Laravel (versão 5.1.0)
+-   XAMPP (ou equivalente)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Configuração do Ambiente
 
-## Learning Laravel
+1. Clone este repositório para sua máquina local:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    ```bash
+    git clone https://github.com/coelhiN77/easycep.git
+    ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+2. Acesse o diretório do projeto:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```bash
+   git cd easycepdb
+```
 
-## Laravel Sponsors
+Abra o arquivo .env e configure as informações de conexão com o banco de dados. Você pode usar as seguintes configurações como exemplo, mas ajuste-as conforme necessário:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+dotenv
+Copy code
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3307
+DB_DATABASE=easycepdb
+DB_USERNAME=root
+DB_PASSWORD=
+Certifique-se de que o Apache e o MySQL do XAMPP (ou equivalente) estejam iniciados.
 
-### Premium Partners
+Acesse a configuração do Apache e edite o arquivo phpMyAdmin/config.inc.php. Encontre a linha que define o host do MySQL e adicione a porta 3307, conforme o exemplo abaixo:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+$cfg['Servers'][$i]['host'] = '127.0.0.1:3307';
+Abra o arquivo de configuração do Apache httpd.conf e altere a porta padrão de 80 para 8087, ou outra porta disponível, se necessário.
 
-## Contributing
+Abra o arquivo de configuração do MySQL (geralmente chamado de my.ini) e ajuste a porta de 3306 para 3307, se ainda não tiver sido feito.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Executando o Projeto
+Inicie o servidor de desenvolvimento do Laravel:
+php artisan serve
 
-## Code of Conduct
+O Laravel gerará um link semelhante a [http://127.0.0.1:8000]. Abra este link em seu navegador.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Agora, o projeto Laravel estará sendo executado localmente em sua máquina.
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Lembre-se de substituir seu-usuario e seu-repositorio pelas informações corretas do seu repositório. Além disso, verifique se todas as versões e configurações são compatíveis.
